@@ -1,31 +1,35 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState, useEffect } from "react";
 import { Task } from "entities/task/model/types";
-
-const initialTasks: Task[] = [
-  { id: 1, title: "Позавтракать", completed: false },
-  { id: 2, title: "Сделать домашнее задание", completed: true },
-  { id: 3, title: "Купить продукты", completed: false },
-  { id: 4, title: "Распечатать документы", completed: false },
-];
+import { useGetTasksQuery } from "entities/task/api/tasksApi";
 
 export type Filter = 'all' | 'completed' | 'incompleted';
 
 export function useTasks() {
-  const [tasks, setTasks] = useState<Task[]>(initialTasks);
+  const { data: tasks = [] } = useGetTasksQuery();
+  const [deleteTasks, setDeleteTasks] = useState<Task[]>([]);
+
   const [filter, setFilter] = useState<Filter>('all');
 
   const deleteTask = useCallback((id: number) => {
-    setTasks(prev => prev.filter(task => task.id !== id));
+    setDeleteTasks(prev => prev.filter(task => task.id !== id));
   }, []);
+
+  useEffect(() => {
+    console.log(tasks, deleteTasks)
+    if (deleteTasks.length > 0 && tasks.length === 0) {
+      console.log(deleteTasks)
+      setDeleteTasks(tasks);
+    }
+  }, [tasks, deleteTasks.length]);
   
 
   const filteredTasks = useMemo(() => {
     return filter === 'all' ?
-     tasks :
-     tasks.filter(task =>
+     deleteTasks :
+     deleteTasks.filter(task =>
       filter === 'completed' ? task.completed : !task.completed
     )
-  }, [tasks, filter]);
+  }, [deleteTasks, filter]);
   
   return {
     tasks: filteredTasks,
