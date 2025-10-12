@@ -1,7 +1,6 @@
 import React from 'react'
 import { Task } from '../model/types'
 import styles from "./TaskCard.module.css";
-import { Button } from 'shared/button/ui/Button';
 
 type Props = {
     task: Task;
