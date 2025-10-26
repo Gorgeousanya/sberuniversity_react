@@ -1,13 +1,9 @@
-import TaskPage from 'pages/home/ui/TaskPage'
-import styles from './App.module.css'
+import { RHFPage } from '../pages/RHF'
 
-function App() {
-
-  return (
-    <>
-      <TaskPage />
-    </>
-  )
-}
-
-export default App
+export const App = () => {
+    return (
+        <>
+            <RHFPage/>
+        </>
+    );
+};

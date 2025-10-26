@@ -15,9 +15,7 @@ export function useTasks() {
   }, []);
 
   useEffect(() => {
-    console.log(tasks, deleteTasks)
-    if (deleteTasks.length > 0 && tasks.length === 0) {
-      console.log(deleteTasks)
+    if (deleteTasks.length === 0) {
       setDeleteTasks(tasks);
     }
   }, [tasks, deleteTasks.length]);
