@@ -1,9 +1,9 @@
-import { RHFPage } from '../pages/RHF'
+import { RefPage } from "pages/ref";
 
 export const App = () => {
     return (
         <>
-            <RHFPage/>
+            <RefPage />
         </>
     );
 };
