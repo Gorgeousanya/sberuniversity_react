@@ -1,9 +1,9 @@
-import { RefPage } from "pages/ref";
+import { AppRouter } from '../features/authRouting/AppRouter'
 
 export const App = () => {
     return (
         <>
-            <RefPage />
+            <AppRouter />
         </>
     );
 };
